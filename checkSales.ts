@@ -23,25 +23,26 @@ const  discordSetup = async (): Promise<TextChannel> => {
 const buildMessage = (sale: any) => (
   new Discord.MessageEmbed()
 	.setColor('#0099ff')
-	.setTitle(sale.asset.name + ' sold!')
+	.setTitle('New Thingie Sold!')
 	.setURL(sale.asset.permalink)
-	.setAuthor('Thingie McBobber', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png', 'https://github.com/sbauch/opensea-discord-bot')
+	.setAuthor('Scrooge McFluff', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png', 'https://github.com/sbauch/opensea-discord-bot')
 	.setThumbnail(sale.asset.collection.image_url)
 	.addFields(
-		{ name: 'Name', value: sale.asset.name },
+		//{ name: 'Name', value: sale.asset.name },
 		{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price || '0')}${ethers.constants.EtherSymbol}`},
-		{ name: 'Buyer', value: sale?.winner_account?.address, },
-		{ name: 'Seller', value: sale?.seller?.address,  },
+    { name: 'Link', value: sale.asset.permalink},
+		//{ name: 'Buyer', value: sale?.winner_account?.address, },
+		//{ name: 'Seller', value: sale?.seller?.address,  },
 	)
   .setImage(sale.asset.image_url)
 	.setTimestamp(Date.parse(`${sale?.created_date}Z`))
-	.setFooter('Sold on OpenSea', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png')
+	//.setFooter('Sold on OpenSea', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png')
 )
 
 async function main() {
   const channel = await discordSetup();
-  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3_600;
-  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
+  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 300;
+  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 5 min, so run server every 5 min
   
   const params = new URLSearchParams({
     offset: '0',
