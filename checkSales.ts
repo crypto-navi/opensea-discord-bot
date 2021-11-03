@@ -25,11 +25,11 @@ const buildMessage = (sale: any) => (
 	.setColor('#0099ff')
 	.setTitle('New Thingie Sold!')
 	.setURL(sale.asset.permalink)
-	.setAuthor('Scrooge McFluff', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png', 'https://github.com/sbauch/opensea-discord-bot')
+	//.setAuthor('Scrooge McFluff', 'https://files.readme.io/566c72b-opensea-logomark-full-colored.png', 'https://github.com/sbauch/opensea-discord-bot')
 	.setThumbnail(sale.asset.collection.image_url)
 	.addFields(
 		//{ name: 'Name', value: sale.asset.name },
-		{ name: 'Amount', value: `${ethers.utils.formatEther(sale.total_price || '0')}${ethers.constants.EtherSymbol}`},
+		{ name: 'Price', value: `${ethers.utils.formatEther(sale.total_price || '0')}${ethers.constants.EtherSymbol}`},
     { name: 'Link', value: sale.asset.permalink},
 		//{ name: 'Buyer', value: sale?.winner_account?.address, },
 		//{ name: 'Seller', value: sale?.seller?.address,  },
@@ -41,8 +41,8 @@ const buildMessage = (sale: any) => (
 
 async function main() {
   const channel = await discordSetup();
-  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 600;
-  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 5 min, so run server every 5 min
+  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3600; // 10 mins
+  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 10 min, so run heroku scheduler every 10 min (configure in Heroku)
   
   const params = new URLSearchParams({
     offset: '0',
