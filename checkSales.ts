@@ -41,8 +41,8 @@ const buildMessage = (sale: any) => (
 
 async function main() {
   const channel = await discordSetup();
-  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3600; // 10 mins
-  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 10 min, so run heroku scheduler every 10 min (configure in Heroku)
+  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 3600; // 60 mins
+  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 60 min, so run heroku scheduler every 10 min (configure in Heroku)
   
   const params = new URLSearchParams({
     offset: '0',
