@@ -1,5 +1,5 @@
 {
-  "name": "OpenSea Discord Bot",
+  "name": "Thingie Bot",
   "description": "A TS script to hit the OpenSea API for collection sales and send messages to Discord",
   "keywords": [
     "ethereum",
