@@ -41,8 +41,8 @@ const buildMessage = (sale: any) => (
 
 async function main() {
   const channel = await discordSetup();
-  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 300;
-  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 5 min, so run server every 5 min
+  const seconds = process.env.SECONDS ? parseInt(process.env.SECONDS) : 600;
+  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last 10 min, so run server every 10 min
   
   const params = new URLSearchParams({
     offset: '0',
